@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lcms-compound-curation"
+version = "2.1.0"
+description = "Portable six-file LC-MS curation, sample-QC, MS2, chemistry, thresholding, and contextual scoring GUI"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+  "PySide6>=6.10.1,<6.12",
+  "pandas>=2.3.3,<3.1",
+  "numpy>=2.2,<3",
+  "openpyxl>=3.1.5,<4",
+]
+
+[project.scripts]
+lcms-curation = "lcms_curation.gui:run"
+
+[tool.setuptools]
+packages = ["lcms_curation"]
+
+[tool.ruff.lint]
+ignore = [
+  "B008",   # Qt model APIs conventionally use QModelIndex() sentinel defaults.
+  "BLE001", # GUI workers must surface every analysis/export failure to the user.
+  "DTZ005", # Export-folder timestamps intentionally use the user's local time.
+]
